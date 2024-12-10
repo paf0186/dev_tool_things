@@ -19,6 +19,7 @@ nnoremap <leader>w :w<CR>
 " <leader>q to quit
 nnoremap <leader>q :q<CR>
 
+" <leader>n to disable/enable numbers on left side
 nnoremap <leader>n :set number! relativenumber!<CR>
 set number relativenumber
 set ruler
