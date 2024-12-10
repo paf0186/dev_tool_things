@@ -12,6 +12,14 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'airblade/vim-gitgutter'
 call plug#end()
 
+let mapleader=" "
+" <leader>w to save
+nnoremap <leader>w :w<CR>
+
+" <leader>q to quit
+nnoremap <leader>q :q<CR>
+
+nnoremap <leader>n :set number! relativenumber!<CR>
 set number relativenumber
 set ruler
 let g:clang_format#detect_style_file = 1
