@@ -73,3 +73,7 @@ if has("cscope")
 	" d: Find functions called by this function
 	nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
+
+" Save file position
+set viminfo='100,<1000,s100,h
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
