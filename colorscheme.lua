@@ -8,12 +8,12 @@ function M.setup()
     
     local colors = {
         bg = '#000000',
-        fg = '#cccccc',     -- even softer white for general text
+        fg = '#cccccc',     -- soft white for general text
         blue = '#0044dd',   -- comments
         orange = '#b35900', -- control flow
         green = '#00aa00',  -- types
-        red = '#b30000',    -- string literals
-        purple = '#aa44ff', -- preprocessor directives
+        red = '#cc0000',    -- string literals
+        purple = '#991199', -- preprocessor directives and macros
     }
     
     local highlights = {
@@ -36,6 +36,15 @@ function M.setup()
         cPreProc = { fg = colors.purple },
         cDefine = { fg = colors.purple },
         cPreCondit = { fg = colors.purple },
+        cInclude = { fg = colors.purple },
+        cPreConditMatch = { fg = colors.purple },  -- Added for preprocessor conditionals
+        cMacro = { fg = colors.purple },           -- Added for macro definitions
+        cMacroName = { fg = colors.purple },       -- Added for macro names
+        cDefine = { fg = colors.purple },
+        
+        -- Special handling for predefined macros
+        cSpecial = { fg = colors.purple },         -- For special symbols like __STDC_VERSION__
+        cSpaceError = { bg = colors.bg },          -- Remove background highlighting for spaces
         
         cType = { fg = colors.green },
         cStorageClass = { fg = colors.green },
