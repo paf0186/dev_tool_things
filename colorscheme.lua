@@ -9,15 +9,15 @@ function M.setup()
     -- Enable true color support
     vim.opt.termguicolors = true
     
-    -- Exact color matches from your screenshot
+    -- Balanced, rich color matches
     local colors = {
         bg = '#000000',
         fg = '#ffffff',
-        blue = '#3465ff',      -- comments
-        orange = '#ff8800',    -- keywords, line numbers
-        green = '#b8ff00',     -- long strings (like hex colors)
-        white = '#ffffff',     -- variables, operators
-        red = '#ff0000',       -- string literals like 'dark' and 'true'
+        blue = '#0044dd',      -- balanced blue for comments
+        orange = '#b35900',    -- balanced orange for keywords
+        green = '#77aa00',     -- balanced green for hex colors
+        white = '#ececec',     -- slightly muted white
+        red = '#b30000',       -- balanced red
     }
     
     -- Set highlight groups
@@ -44,19 +44,9 @@ function M.setup()
         luaStatement = { fg = colors.orange },
         luaTable = { fg = colors.white },     -- table brackets
         luaOperator = { fg = colors.white },
-        -- Special case for hex color strings in Lua
-        luaString = { fg = colors.green, sp = colors.red },
+        luaString = { fg = colors.red },
     }
-
-    -- Custom logic to handle different types of strings
-    local function handle_lua_string(match)
-        if match:match('^#%x+$') then
-            return { fg = colors.green }  -- hex colors
-        else
-            return { fg = colors.red }    -- regular strings
-        end
-    end
-
+    
     -- Apply highlights
     for group, settings in pairs(highlights) do
         vim.api.nvim_set_hl(0, group, settings)
