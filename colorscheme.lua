@@ -9,57 +9,54 @@ function M.setup()
     -- Enable true color support
     vim.opt.termguicolors = true
     
-    -- Basic color definitions
+    -- Exact color matches from your screenshot
     local colors = {
         bg = '#000000',
         fg = '#ffffff',
-        black = '#121212',
-        red = '#ff5555',
-        green = '#50fa7b',
-        yellow = '#f1fa8c',
-        blue = '#bd93f9',
-        magenta = '#ff79c6',
-        cyan = '#8be9fd',
-        white = '#f8f8f2',
-        bright_black = '#6272a4',
-        bright_red = '#ff6e6e',
-        bright_green = '#69ff94',
-        bright_yellow = '#ffffa5',
-        bright_blue = '#d6acff',
-        bright_magenta = '#ff92df',
-        bright_cyan = '#a4ffff',
-        bright_white = '#ffffff',
+        blue = '#3465ff',      -- comments
+        orange = '#ff8800',    -- keywords, line numbers
+        green = '#b8ff00',     -- long strings (like hex colors)
+        white = '#ffffff',     -- variables, operators
+        red = '#ff0000',       -- string literals like 'dark' and 'true'
     }
     
     -- Set highlight groups
     local highlights = {
         -- Editor highlights
-        Normal = { fg = colors.fg, bg = colors.bg },
-        LineNr = { fg = colors.bright_black },
-        CursorLine = { bg = colors.black },
-        CursorLineNr = { fg = colors.yellow },
-        Visual = { bg = colors.bright_black },
+        Normal = { fg = colors.white, bg = colors.bg },
+        LineNr = { fg = colors.orange },
+        CursorLine = { bg = colors.bg },
+        NonText = { fg = colors.orange },    -- for the tilde markers
         
         -- Syntax highlighting
-        Comment = { fg = colors.bright_black, italic = true },
-        Constant = { fg = colors.magenta },
-        String = { fg = colors.yellow },
-        Identifier = { fg = colors.cyan },
-        Function = { fg = colors.green },
-        Statement = { fg = colors.magenta },
-        Keyword = { fg = colors.magenta },
-        PreProc = { fg = colors.magenta },
-        Type = { fg = colors.blue },
-        Special = { fg = colors.cyan },
+        Comment = { fg = colors.blue },
+        Statement = { fg = colors.orange },   -- keywords like 'local', 'function'
+        Identifier = { fg = colors.white },   -- variable names
+        Operator = { fg = colors.white },     -- equals signs and operators
+        String = { fg = colors.red },         -- basic string literals
+        SpecialString = { fg = colors.green }, -- hex color strings
+        Number = { fg = colors.orange },
+        Special = { fg = colors.white },      -- special chars like brackets
+        Boolean = { fg = colors.red },        -- for 'true' and 'false'
         
-        -- UI elements
-        StatusLine = { fg = colors.white, bg = colors.black },
-        StatusLineNC = { fg = colors.bright_black, bg = colors.black },
-        VertSplit = { fg = colors.bright_black },
-        Pmenu = { fg = colors.white, bg = colors.black },
-        PmenuSel = { fg = colors.black, bg = colors.cyan },
+        -- Lua specific
+        luaFunction = { fg = colors.orange },
+        luaStatement = { fg = colors.orange },
+        luaTable = { fg = colors.white },     -- table brackets
+        luaOperator = { fg = colors.white },
+        -- Special case for hex color strings in Lua
+        luaString = { fg = colors.green, sp = colors.red },
     }
-    
+
+    -- Custom logic to handle different types of strings
+    local function handle_lua_string(match)
+        if match:match('^#%x+$') then
+            return { fg = colors.green }  -- hex colors
+        else
+            return { fg = colors.red }    -- regular strings
+        end
+    end
+
     -- Apply highlights
     for group, settings in pairs(highlights) do
         vim.api.nvim_set_hl(0, group, settings)
