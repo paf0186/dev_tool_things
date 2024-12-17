@@ -21,6 +21,9 @@ nnoremap <leader>q :q<CR>
 
 " <leader>n to disable/enable numbers on left side
 nnoremap <leader>n :set number! relativenumber!<CR>
+
+nnoremap <C-[> <C-t>
+
 set number relativenumber
 set ruler
 let g:clang_format#detect_style_file = 1

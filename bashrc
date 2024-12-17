@@ -31,6 +31,7 @@ cd /shared/master_checkouts/
 
 # all
 alias cdmc='cd /shared/master_checkouts/'
+alias cdddnc='cd /shared/ddn_checkouts/'
 alias gcav='git commit -av'
 alias gcllma='gcllm.sh -a'
 alias gcllmar='gcllm.sh -a -r'
