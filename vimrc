@@ -10,6 +10,9 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " Shows git diff markers in the gutter
 Plug 'airblade/vim-gitgutter'
+
+Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+
 call plug#end()
 
 let mapleader=" "
@@ -77,6 +80,27 @@ if has("cscope")
 	nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
 
+" Codeium
+imap <C-'>   <Cmd>call codeium#CycleCompletions(1)<CR>
+imap <C-;>   <Cmd>call codeium#CycleCompletions(-1)<CR>
+imap <script><silent><nowait><expr> <C-g> codeium#Accept()
+imap <C-x>  <Cmd>call codeium#Clear()<CR>
+" Set dark background for entire statusline
+highlight StatusLine ctermbg=235 ctermfg=white guibg=#262626 guifg=white
+highlight StatusLineNC ctermbg=235 ctermfg=white guibg=#262626 guifg=white
+highlight User1 ctermbg=235 ctermfg=white guibg=#262626 guifg=white
+
+" Define full statusline content with consistent coloring
+set statusline=%1*
+set statusline+=%f                               " File path
+set statusline+=%m                               " Modified flag
+set statusline+=%r                               " Readonly flag
+set statusline+=%h                               " Help buffer flag
+set statusline+=%w                               " Preview window flag
+set statusline+=%=                               " Switch to right side
+set statusline+=%3{codeium#GetStatusString()}    " Codeium status
+set statusline+=%*                               " Reset highlighting
+set laststatus=2
 " Save file position
 set viminfo='100,<1000,s100,h
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif

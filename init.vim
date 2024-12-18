@@ -1,5 +1,6 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
+set mouse=
 source ~/.vimrc
 " Neovim specific settings
 if has('nvim')

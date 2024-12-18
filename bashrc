@@ -25,7 +25,7 @@ export HISTTIMEFORMAT="%F %T "
 export HISTCONTROL=ignoredups
 export PATH="/usr/local/bin:$PATH"
 export PATH=/usr/lib64/ccache:$PATH
-export CSCOPE_EDITOR=nvim
+export CSCOPE_EDITOR=vim
 
 cd /shared/master_checkouts/
 
