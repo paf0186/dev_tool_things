@@ -98,7 +98,8 @@ set statusline+=%r                               " Readonly flag
 set statusline+=%h                               " Help buffer flag
 set statusline+=%w                               " Preview window flag
 set statusline+=%=                               " Switch to right side
-set statusline+=%3{codeium#GetStatusString()}    " Codeium status
+"set statusline+=%3{codeium#GetStatusString()}    " Codeium status
+set statusline+=%l,%c                            " Line and column numbers
 set statusline+=%*                               " Reset highlighting
 set laststatus=2
 " Save file position
